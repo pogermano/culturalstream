@@ -24,7 +24,7 @@ production:
   #pool: 5
   #timeout: 5000
   
-  adapter: mysql  
+  adapter: mysql2  
   reconnect: false
   database: culturalstream_production
   pool: 5
