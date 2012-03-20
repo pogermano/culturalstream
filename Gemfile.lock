@@ -149,6 +149,7 @@ GEM
       mime-types
     paperclip-ffmpeg (0.7.0)
       paperclip (>= 2.3.8)
+    pg (0.13.2)
     polyglot (0.3.3)
     rack (1.4.1)
     rack-cache (1.1)
@@ -294,6 +295,7 @@ DEPENDENCIES
   capistrano
   coffee-rails (~> 3.2.1)
   jquery-rails
+  pg
   rails (= 3.2.1)
   sass-rails (~> 3.2.3)
   social_stream (>= 0.19.0)
