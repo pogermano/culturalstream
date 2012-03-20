@@ -23,13 +23,29 @@ end
 gem 'jquery-rails'
 
 
-
+group :test, :development do
+  gem 'capistrano'
+  gem 'gmail'
+  gem 'rspec-rails', '~> 2.6.1.beta1'
+end
 group :development do
-gem 'capistrano'
+  gem 'capistrano'
+end
+
+group :test do
+  gem 'rack-test', :git => "git://github.com/radar/rack-test"
+  gem 'cucumber-rails', :git => "git://github.com/cucumber/cucumber-rails"
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'factory_girl'
+  gem 'email_spec'
+  gem 'launchy'
 end
 group :production do
-gem 'pg'
+  gem 'pg'
 end
+
+
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
