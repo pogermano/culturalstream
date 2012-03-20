@@ -6,7 +6,7 @@ gem 'rails', '3.2.1'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'mysql2'
-gem 'sqlite3'
+#gem 'sqlite3'
 gem 'therubyracer'
 gem 'social_stream', '>= 0.19.0'
 # Gems used only for assets and not required
