@@ -5,6 +5,7 @@ gem 'rails', '3.2.1'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
+gem 'mysql2'
 gem 'sqlite3'
 gem 'therubyracer'
 gem 'social_stream', '>= 0.19.0'
@@ -30,10 +31,6 @@ group :development do
   gem 'capistrano'
 end
 
-
-group :production do
-  gem 'pg'
-end
 
 
 
