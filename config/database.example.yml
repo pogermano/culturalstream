@@ -1,5 +1,5 @@
 production:
-  adapter: postgres  
+  adapter: postgresql
   database: culturalstream_production
   pool: 5
   host: localhost
