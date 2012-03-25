@@ -19,10 +19,7 @@ ssh_options[:forward_agent] = true
 
 
 #set :rails_env,       "production"
-set :imagemagick_build_options, {
-  :url => "ftp://ftp.imagemagick.org/pub/ImageMagick/ImageMagick.tar.gz",
-  :unpack_dir => "ImageMagick-*" 
-}
+
 after "deploy", "deploy:cleanup" # keep only the last 5 releases
 
 namespace :deploy do
