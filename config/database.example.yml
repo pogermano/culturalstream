@@ -4,6 +4,6 @@ production:
   pool: 5
   host: localhost
   username: culturalstream
-  password: tucatuca
+  password: tuca
   encoding: utf8
   collation: utf8_general_ci
