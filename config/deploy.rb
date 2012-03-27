@@ -41,7 +41,7 @@ namespace :deploy do
 
   task :sphinx_config, roles: :app do
     puts "        ##################### sphinx ############################"
-    run "cd #{release_path} && bundle exec rake ts:configure --trace RAILS_ENV=production"
+    run "cd #{release_path} && bundle exec rake ts:config --trace RAILS_ENV=production"
     puts "        ##################### sphinx ############################"
   end
   after "deploy:migrate","deploy:sphinx_config"
