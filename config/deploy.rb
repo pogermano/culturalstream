@@ -27,7 +27,7 @@ namespace :deploy do
     desc "#{command} unicorn server"
     task command, roles: :app, except: {no_release: true} do
       run "/etc/init.d/unicorn_#{application} #{command}"
-    end   
+    end 
   end
 
   task :setup_config, roles: :app do
@@ -36,11 +36,13 @@ namespace :deploy do
     run "mkdir -p #{shared_path}/config"
     put File.read("config/database.example.yml"), "#{shared_path}/config/database.yml"
     puts "Now edit the config files in #{shared_path}."
+    run "echo "########################  setup_config  ##################" 
   end
   after "deploy:setup", "deploy:setup_config"
 
   task :symlink_config, roles: :app do
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+    run "echo "########################  symlink_config  ##################"
   end
   after "deploy:finalize_update", "deploy:symlink_config"
 
@@ -51,6 +53,8 @@ namespace :deploy do
       puts "Run `git push` to sync changes."
       exit
     end
+
+    run "echo "########################  check_revision  ##################"
   end
   before "deploy", "deploy:check_revision"
 end
