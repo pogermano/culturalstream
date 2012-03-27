@@ -41,9 +41,10 @@ namespace :deploy do
 
   task :sphinx_config, roles: :app do
     puts "        ##################### sphinx ############################"
-    run "cd #{current_path}/current && bundle exec rake ts:config --trace RAILS_ENV=production"
-    run "cd #{current_path}/current && bundle exec rake ts:start --trace RAILS_ENV=production"
-    run "cd #{current_path}/current && bundle exec rake ts:rebuild --trace RAILS_ENV=production"
+    run "cd #{current_path} && bundle exec rake ts:config --trace RAILS_ENV=production"
+    run "cd #{current_path} && bundle exec rake ts:start --trace RAILS_ENV=production"
+    run "cd #{current_path} && bundle exec rake ts:rebuild --trace RAILS_ENV=production"
+    run "cd #{current_path} && bundle exec rake ts:in --trace RAILS_ENV=production"
     puts "        ##################### sphinx ############################"
   end
   after "deploy:migrate","deploy:sphinx_config"
