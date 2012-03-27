@@ -28,6 +28,8 @@ namespace :deploy do
     task command, roles: :app, except: {no_release: true} do
       run "/etc/init.d/unicorn_#{application} #{command}"
     end
+   
+    run("cd #{deploy_to}/current && #{rake} 'rake ts:configure' RAILS_ENV=production")
   end
 
   task :setup_config, roles: :app do
@@ -35,7 +37,6 @@ namespace :deploy do
     sudo "ln -nfs #{current_path}/config/unicorn_init.sh /etc/init.d/unicorn_#{application}"
     run "mkdir -p #{shared_path}/config"
     put File.read("config/database.example.yml"), "#{shared_path}/config/database.yml"
-    run("cd #{deploy_to}/current && #{rake} 'rake ts:configure' RAILS_ENV=production")
     puts "Now edit the config files in #{shared_path}."
   end
   after "deploy:setup", "deploy:setup_config"
