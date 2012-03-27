@@ -36,13 +36,13 @@ namespace :deploy do
     run "mkdir -p #{shared_path}/config"
     put File.read("config/database.example.yml"), "#{shared_path}/config/database.yml"
     puts "Now edit the config files in #{shared_path}."
-    run "echo "########################  setup_config  ##################" 
+    run "echo ########################  setup_config  ##################" 
   end
   after "deploy:setup", "deploy:setup_config"
 
   task :symlink_config, roles: :app do
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
-    run "echo "########################  symlink_config  ##################"
+    run "echo ########################  symlink_config  ##################"
   end
   after "deploy:finalize_update", "deploy:symlink_config"
 
@@ -54,7 +54,7 @@ namespace :deploy do
       exit
     end
 
-    run "echo "########################  check_revision  ##################"
+    run "echo ########################  check_revision  ##################"
   end
   before "deploy", "deploy:check_revision"
 end
