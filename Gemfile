@@ -4,8 +4,8 @@ gem 'rails', '3.2.1'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
-gem 'pg'
-#gem 'mysql2'
+#gem 'pg'
+gem 'mysql2'
 #gem 'sqlite3'
 gem 'therubyracer'
 gem 'social_stream', '>= 0.19.0'
