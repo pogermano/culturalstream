@@ -40,7 +40,9 @@ namespace :deploy do
   after "deploy:setup", "deploy:setup_config"
 
   task :sphinx_config, roles: :app do
-    puts "##################### sphinx ############################"
+    puts "        ##################### sphinx ############################"
+    run "cd #{release_path} && bundle exec rake ts:configure RAILS_ENV=production"
+    puts "        ##################### sphinx ############################"
   end
   after "deploy:migrate","deploy:sphinx_config"
 
