@@ -18,7 +18,7 @@ default_run_options[:pty] = true
 ssh_options[:forward_agent] = true
 
 
-#set :rails_env,       "production"
+set :rails_env,       "production"
 
 after "deploy", "deploy:cleanup" # keep only the last 5 releases
 
