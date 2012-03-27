@@ -27,9 +27,7 @@ namespace :deploy do
     desc "#{command} unicorn server"
     task command, roles: :app, except: {no_release: true} do
       run "/etc/init.d/unicorn_#{application} #{command}"
-    end
-   
-    run("cd #{deploy_to}/current && #{rake} 'rake ts:configure' RAILS_ENV=production")
+    end   
   end
 
   task :setup_config, roles: :app do
