@@ -41,19 +41,19 @@ namespace :deploy do
 
   task :socialstream_config, roles: :app do
     puts "        ##################### socialstream config ############################"
-     run "cd #{current_path} && bundle exec rake db:drop --trace RAILS_ENV=production"
-     run "cd #{current_path} && bundle exec rake db:create --trace RAILS_ENV=production"
-     run "cd #{current_path} && bundle exec rake social_stream:migrations:update --trace #RAILS_ENV=production"
-     run "cd #{current_path} && bundle exec rake db:migrate --trace RAILS_ENV=production"
-     run "cd #{current_path} && bundle exec rake workers:start --trace RAILS_ENV=production"
+     run "cd #{release_path} && bundle exec rake db:drop --trace RAILS_ENV=production"
+     run "cd #{release_path} && bundle exec rake db:create --trace RAILS_ENV=production"
+     run "cd #{release_path} && bundle exec rake social_stream:migrations:update --trace #RAILS_ENV=production"
+     run "cd #{release_path} && bundle exec rake db:migrate --trace RAILS_ENV=production"
+     run "cd #{release_path} && bundle exec rake workers:start --trace RAILS_ENV=production"
     puts "        ##################### socialstream config ############################"
   end
   before "deploy:migrate","deploy:socialstream_config"
   task :sphinx_config, roles: :app do
     puts "        ##################### sphinx ############################"
-    run "cd #{current_path} && bundle exec rake ts:config --trace RAILS_ENV=production"
-    run "cd #{current_path} && bundle exec rake ts:rebuild --trace RAILS_ENV=production"
-    run "cd #{current_path} && bundle exec rake ts:in --trace RAILS_ENV=production"
+    run "cd #{release_path} && bundle exec rake ts:config --trace RAILS_ENV=production"
+    run "cd #{release_path} && bundle exec rake ts:rebuild --trace RAILS_ENV=production"
+    run "cd #{release_path} && bundle exec rake ts:in --trace RAILS_ENV=production"
     puts "        ##################### sphinx ############################"
   end
   after "deploy:migrate","deploy:sphinx_config"
