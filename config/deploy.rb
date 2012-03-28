@@ -39,13 +39,13 @@ namespace :deploy do
   end
   after "deploy:setup", "deploy:setup_config"
 
-  task :socialstream_config, roles: :app do
-    puts "        ##################### socialstream config ############################"
-     run "cd #{current_path} && bundle exec rake social_stream:migrations:update --trace RAILS_ENV=production"
-     run "cd #{current_path} && bundle exec rake db:migrate --trace RAILS_ENV=production"
-    puts "        ##################### socialstream config ############################"
-  end
-  after "deploy:migrate","deploy:socialstream_config"
+#  task :socialstream_config, roles: :app do
+#    puts "        ##################### socialstream config ############################"
+#     run "cd #{current_path} && bundle exec rake social_stream:migrations:update --trace #RAILS_ENV=production"
+#     run "cd #{current_path} && bundle exec rake db:migrate --trace RAILS_ENV=production"
+#    puts "        ##################### socialstream config ############################"
+#  end
+#  after "deploy:migrate","deploy:socialstream_config"
   task :sphinx_config, roles: :app do
     puts "        ##################### sphinx ############################"
     run "cd #{current_path} && bundle exec rake ts:config --trace RAILS_ENV=production"
