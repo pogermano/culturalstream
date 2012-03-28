@@ -41,6 +41,8 @@ namespace :deploy do
 
   task :socialstream_config, roles: :app do
     puts "        ##################### socialstream config ############################"
+     run "cd #{current_path} && bundle exec rake db:drop --trace RAILS_ENV=production"
+     run "cd #{current_path} && bundle exec rake db:create --trace RAILS_ENV=production"
      run "cd #{current_path} && bundle exec rake social_stream:migrations:update --trace #RAILS_ENV=production"
      run "cd #{current_path} && bundle exec rake db:migrate --trace RAILS_ENV=production"
      run "cd #{current_path} && bundle exec rake workers:start --trace RAILS_ENV=production"
