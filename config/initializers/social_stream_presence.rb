@@ -1,6 +1,6 @@
 SocialStream::Presence.setup do |config| 
   #Configures XMPP Server Domain
-  config.domain = "localhost"
+  config.domain = "culturalstream.com"
   #Configures Bosh Service Path
   #config.bosh_service = "http://xmpp-proxy/http-bind"
   #Configures Authentication Method: "cookie" or "password"
