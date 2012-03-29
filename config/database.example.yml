@@ -1,6 +1,5 @@
 production:
-  adapter: mysql2  
-  reconnect: true
+  adapter: mysql2 
   database: culturalstream_production
   pool: 5
   username: culturalstream
