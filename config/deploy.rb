@@ -47,7 +47,6 @@ namespace :deploy do
      run "cd #{release_path} && bundle exec rake social_stream:migrations:update --trace #RAILS_ENV=production"
      run "cd #{release_path} && bundle exec rake db:migrate --trace RAILS_ENV=production"
      run "cd #{release_path} && bundle exec rake workers:start --trace RAILS_ENV=production"
-     run "cd #{release_path} && bundle exec show social_stream-documents --trace RAILS_ENV=production" 
     puts "        ##################### socialstream config ############################"
   end
   before "deploy:migrate","deploy:socialstream_config"
