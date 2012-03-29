@@ -19,18 +19,10 @@
 #  timeout: 5000
 
 production:  
-#  adapter: mysql2  
-#  reconnect: true
-#  database: culturalstream_production
-#  pool: 5
-#  username: culturalstream
-#  password: tuca
-#  encoding: utf8
-#  collation: utf8_general_ci
-  adapter: postgresql
+  adapter: mysql2  
+  reconnect: true
   database: culturalstream_production
   pool: 5
-  host: localhost
   username: culturalstream
   password: tuca
   encoding: utf8
