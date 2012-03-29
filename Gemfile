@@ -11,6 +11,7 @@ gem 'mysql2'
 #gem 'sqlite3'
 gem 'therubyracer'
 gem 'social_stream', '>= 0.19.0'
+gem 'social_stream-presence'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
