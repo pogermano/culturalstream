@@ -2,5 +2,5 @@
 require File.expand_path('../application', __FILE__)
 
 # Initialize the rails application
-Culturalstream::Application.initialize!
+Teste::Application.initialize!
 

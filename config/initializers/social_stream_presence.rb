@@ -1,12 +1,12 @@
 SocialStream::Presence.setup do |config| 
-  #Configures XMPP Server Domain
-  config.domain = "culturalstream.com"
+  #Configures Web Server Domain served by XMPP Server
+  config.domain = "localhost"
   #Configures Bosh Service Path
   #config.bosh_service = "http://xmpp-proxy/http-bind"
   #Configures Authentication Method: "cookie" or "password"
   config.auth_method = "cookie"
   #Configures XMPP Server Password
-  config.xmpp_server_password = "83946ede89e3409f877988ba348be7dd"
+  config.xmpp_server_password = "637845ee41ceab3f4efb12166c9ec512"
   #Uncomment to enable REST API Security
   #config.secure_rest_api = true
   #Remote or local mode
@@ -29,6 +29,12 @@ SocialStream::Presence.setup do |config|
   #Username of the the Social Stream Admin sid
   config.social_stream_presence_username = "social_stream-presence"
   #Configures Social Stream Rails App Password
-  config.password = "12b69766487b161d6284cb43e6162cf4dffc09d7785a429b2e81ad3af90ba897"  
+  config.password = "38f9140dee513cee5801c726b7ac06bd07828b9150ed54857e838a8f38a37745"
+  
+  #OpenTok settings (Only for videochat)
+  #Replace with your OpenTok API key.
+  #config.opentok_api_key = ""
+  #Replace with your OpenTok API secret.
+  #config.opentok_api_secret = ""
 
 end

@@ -3,6 +3,7 @@
 
 /log/*.log
 /tmp
+/tmp/*
 /config/database.yml
 /config/deploy.rb.bkp
 /Capifile.bkp
