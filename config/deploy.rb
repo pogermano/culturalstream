@@ -1,9 +1,9 @@
 require 'bundler/capistrano'
 
-server "173.230.137.11", :web, :app, :db, primary:  true
+server "33.33.13.37", :web, :app, :db, primary:  true
 
 set :application, "culturalstream"
-set :user, "deployer"
+set :user, "vagrant"
 set :deploy_to, "/home/#{user}/apps/#{application}"
 set :deploy_via, :remote_cache
 set :use_sudo, false
@@ -20,45 +20,23 @@ ssh_options[:forward_agent] = true
 
 set :rails_env,       "production"
 
-after "deploy", "deploy:cleanup" # keep only the last 5 releases
 
 namespace :deploy do
-  %w[start stop restart].each do |command|
-    desc "#{command} unicorn server"
-    task command, roles: :app, except: {no_release: true} do
-      run "/etc/init.d/unicorn_#{application} #{command}"
-    end 
+  task :start do; end
+  task :stop do; end
+  task :restart, roles: :app, except: {no_release: true} do
+    run "touch #{deploy_to}/current/tmp/restart.txt"
   end
 
   task :setup_config, roles: :app do
-    sudo "ln -nfs #{current_path}/config/nginx.conf /etc/nginx/sites-enabled/#{application}"
-    sudo "ln -nfs #{current_path}/config/unicorn_init.sh /etc/init.d/unicorn_#{application}"
+    sudo "ln -nfs #{current_path}/config/apache.conf /etc/apache2/sites-available/#{application}"
     run "mkdir -p #{shared_path}/config"
     put File.read("config/database.example.yml"), "#{shared_path}/config/database.yml"
     puts "Now edit the config files in #{shared_path}."
   end
   after "deploy:setup", "deploy:setup_config"
 
-  task :socialstream_config, roles: :app do
-    puts "        ##################### socialstream config ############################"
-     run "cd #{release_path} && bundle update --trace RAILS_ENV=production"
-     run "cd #{release_path} && bundle exec rake db:drop --trace RAILS_ENV=production"
-     run "cd #{release_path} && bundle exec rake db:create --trace RAILS_ENV=production"
-     run "cd #{release_path} && bundle exec rake social_stream:migrations:update --trace #RAILS_ENV=production"
-     run "cd #{release_path} && bundle exec rake db:migrate --trace RAILS_ENV=production"
-    # run "cd #{release_path} && bundle exec rake workers:start --trace RAILS_ENV=production"
-
-
-
-
-     run "cd #{release_path} && bundle exec rails -v --trace RAILS_ENV=production"
-  #   run "cd #{release_path} && rails g social_stream:presence:install --trace RAILS_ENV=production"
-
-     run "cd #{release_path} && bundle exec rake presence:install:xmpp_server --trace RAILS_ENV=production"
-    puts "        ##################### socialstream config ############################"
-  end
-  before "deploy:migrate","deploy:socialstream_config"
-  task :sphinx_config, roles: :app do
+task :sphinx_config, roles: :app do
     puts "        ##################### sphinx ############################"
     run "cd #{release_path} && bundle exec rake ts:config --trace RAILS_ENV=production"
     run "cd #{release_path} && bundle exec rake ts:rebuild --trace RAILS_ENV=production"
@@ -67,7 +45,8 @@ namespace :deploy do
   end
   after "deploy:migrate","deploy:sphinx_config"
 
-  task :symlink_config, roles: :app do
+
+ task :symlink_config, roles: :app do
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
   end
   after "deploy:finalize_update", "deploy:symlink_config"
