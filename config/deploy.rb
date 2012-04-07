@@ -36,6 +36,30 @@ namespace :deploy do
   end
   after "deploy:setup", "deploy:setup_config"
 
+
+ task :socialstream_config, roles: :app do
+    puts "        ##################### socialstream config ############################"
+     run "cd #{release_path} && bundle update --trace RAILS_ENV=production"
+     run "cd #{release_path} && bundle exec rake db:drop --trace RAILS_ENV=production"
+     run "cd #{release_path} && bundle exec rake db:create --trace RAILS_ENV=production"
+     run "cd #{release_path} && bundle exec rake social_stream:migrations:update --trace #RAILS_ENV=production"
+     run "cd #{release_path} && bundle exec rake db:migrate --trace RAILS_ENV=production"
+     run "cd #{release_path} && bundle exec rake workers:start --trace RAILS_ENV=production"
+
+     run "cd #{release_path} && bundle exec rails -v --trace RAILS_ENV=production"
+  #   run "cd #{release_path} && rails g social_stream:presence:install --trace RAILS_ENV=production"
+
+#     run "cd #{release_path} && #{sudo :as => deployer} && bundle exec rake presence:install:xmpp_server  RAILS_ENV=production"
+    puts "        ##################### socialstream config ############################"
+  end
+  before "deploy:migrate","deploy:socialstream_config"
+ 
+
+
+
+
+
+
 task :sphinx_config, roles: :app do
     puts "        ##################### sphinx ############################"
     run "cd #{release_path} && bundle exec rake ts:config --trace RAILS_ENV=production"
